@@ -6,3 +6,4 @@ read -p "Enter value c: " c
 A=$((a+b*c))
 B=$((a*b+c))
 C=`echo "scale=1;$c+$a/$b" | bc`
+D=$((a%b+c))
