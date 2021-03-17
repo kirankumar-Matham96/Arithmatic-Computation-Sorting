@@ -18,4 +18,19 @@ ArrResults[3]=${Results[D]}
 
 echo ${ArrResults[@]}
 
+for((i=0;i<${#ArrResults[@]};i++))
+do
+	for((j=0;j<((${#ArrResults[@]}-i-1));j++))
+	do
+		echo "j="$j" i="$i" ArrResults[$j]="${ArrResults[$j]}" ArrResults[$j+1]="${ArrResults[$j+1]}
+		if [ $((`echo "if(( ${ArrResults[$j]}<${ArrResults[$j+1]} )) 1" | bc`)) -eq 1 ]
+		then
+			#swap
+			ArrResults[$j]=`echo "scale=1;${ArrResults[$j]}+${ArrResults[$j+1]}" | bc`
+			ArrResults[$j+1]=`echo "scale=1;${ArrResults[$j]}-${ArrResults[$j+1]}" | bc`
+			ArrResults[$j]=`echo "scale=1;${ArrResults[$j]}-${ArrResults[$j+1]}" | bc`
+		fi
+	done
+done
 
+echo ${ArrResults[@]}
