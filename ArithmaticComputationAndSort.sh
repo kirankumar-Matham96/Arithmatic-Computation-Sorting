@@ -22,7 +22,7 @@ for((i=0;i<${#ArrResults[@]};i++))
 do
 	for((j=0;j<((${#ArrResults[@]}-i-1));j++))
 	do
-		if [ $((`echo "if(( ${ArrResults[$j]}<${ArrResults[$j+1]} )) 1" | bc`)) -eq 1 ]
+		if [ $((`echo "if(( ${ArrResults[$j]}>${ArrResults[$j+1]} )) 1" | bc`)) -eq 1 ]
 		then
 			#swap
 			ArrResults[$j]=`echo "scale=1;${ArrResults[$j]}+${ArrResults[$j+1]}" | bc`
